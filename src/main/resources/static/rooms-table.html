@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>All Rooms</title>
+</head>
+
+<body>
+
+<h2>All 50 Rooms</h2>
+
+<table border="1">
+<thead>
+<tr>
+<th>Room No</th>
+<th>Type</th>
+<th>Price</th>
+<th>Customer Name</th>
+<th>Customer Phone</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="tableData"></tbody>
+</table>
+
+<script>
+fetch("http://localhost:8080/rooms/all")
+.then(res => res.json())
+.then(data => {
+
+    let output = "";
+
+    data.forEach(room => {
+
+        output += `
+        <tr>
+        <td>${room.id}</td>
+        <td>${room.type}</td>
+        <td>${room.price}</td>
+        <td>-</td>
+        <td>-</td>
+        <td>${room.available ? "Available" : "Booked"}</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("tableData").innerHTML = output;
+});
+</script>
+
+</body>
+</html>
